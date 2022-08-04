@@ -2,7 +2,11 @@
     "name": "esscalc",
     "displayName": "EssCalc",
     "description": "Syntax Highlighting for Essbase Calculations",
-    "version": "0.0.1",
+    "version": "0.0.2",
+    "activationEvents": [
+        "onLanguage:csc"
+    ],
+    "main": "./out/extension",
     "engines": {
         "vscode": "^1.45.0"
     },
@@ -20,6 +24,31 @@
             "language": "csc",
             "scopeName": "source.esscalc",
             "path": "./syntaxes/csc.tmLanguage.json"
-        }]
+        }],
+        "snippets": [{
+            "language": "csc",
+            "path": "./snippets/csc.json"
+        }],
+        "configuration": {
+            "type": "object",
+            "title": "Essbase Calc Script Language",
+            "properties": {
+                "csc.maxNumberOfProblems": {
+                    "type": "number",
+                    "default": 100,
+                    "description": "Controls the maximum number of problems produced by the server."
+                }
+            }
+        },
+        "configurationDefaults": {
+            "[csc]": {
+                "editor.tabSize": 4,
+                "editor.insertSpaces": false,
+                "editor.detectIndentation": true,
+                "editor.trimAutoWhitespace": true,
+                "editor.autoClosingBrackets": "always"
+            }
+        }
     }
+
 }
