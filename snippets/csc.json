@@ -1,0 +1,93 @@
+{
+    "Header Comment": {
+        "prefix": "header",
+        "body": [
+            "/* ",
+            "Script Name: \t$0",
+            "Written By: \t",
+            "On: \t",
+            "Purpose: \t",
+            "\n",
+            "Update Log: \t",
+            "\n",
+            "*/"
+        ],
+        "description": "Header Comment Block"
+    },
+
+    "If-Then Statement": {
+        "prefix": "ifthen",
+        "body": [
+            "IF (${condition}) ",
+            "\t$0",
+            "ENDIF"
+        ],
+        "description": "If-Then Statement"
+    },
+    "If-Else Statement": {
+        "prefix": "ifelse",
+        "body": [
+            "IF (${condition}) ",
+            "\t$0",
+            " ELSE ",
+            "\t",
+            "ENDIF"
+        ],
+        "description": "If-Else Statement"
+    },
+    "If-Elseif Statement": {
+        "prefix": "ifelseif",
+        "body": [
+            "IF (${condition}) ",
+            "\t$0",
+            " ELSEIF (${condition2}) ",
+            "\t",
+            " ELSE ",
+            "\t",
+            "ENDIF"
+        ],
+        "description": "If-Else Statement"
+    },
+
+    "fix Statement": {
+        "prefix": "fix",
+        "body": [
+            "FIX (${fixmbrs}) ",
+            "\t$0",
+            "ENDFIX"
+        ],
+        "description": "Fix Statement"
+    },
+    "Datacopy Statement": {
+        "prefix": "datacopy",
+        "body": [
+            "DATACOPY (${source}) TO (${target});",
+            "$0"
+        ],
+        "description": "Fix Statement"
+    },
+    "Calcmode Statement": {
+        "prefix": "@calcmode",
+        "body": [
+            "@CALCMODE (${CELL}|${BLOCK}|${TOPDOWN}|${BOTTOMUP}) ;",
+            "$0"
+        ],
+        "description": "Calcmode Statement"
+    },
+    "Clearblock Statement": {
+        "prefix": "clearblock",
+        "body": [
+            "CLEARBLOCK ${ALL}|${UPPER}|${NONINPUT}|${DYNAMIC}|${EMPTY} ;",
+            "$0"
+        ],
+        "description": "Calcmode Statement"
+    },
+    "Relative Statement": {
+        "prefix": "@relative",
+        "body": [
+            "@RELATIVE ( ${member}, ${genlevnum}) ",
+            "$0"
+        ],
+        "description": "@Relative Statement"
+    }
+}
