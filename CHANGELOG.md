@@ -8,7 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Initial release
 
-20220804 v0.2
+
+## 0.0.2
+20220804 v0.0.2
 
 v 0.0.2 Forked by Paul Hoch
 - Bump version to 0.0.2
