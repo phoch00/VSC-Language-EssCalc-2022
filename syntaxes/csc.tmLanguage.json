@@ -1,106 +1,257 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "EssCalc",
-	"patterns": [
-		{"include": "#keywords"},
-		{"include": "#strings"},
-		{"include": "#comments"},
-		{"include": "#constants"}
-		
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [
-				{
-					"comment": "Wrapper Keywords",
-					"name": "keyword.control.csc",
-					"match": "(?i)\\b(FIX|ENDFIX|FIXPARALLEL|ENDFIXPARALLEL|IF|ELSE|ELSEIF|ENDIF|LOOP|ENDLOOP|EXCLUDE|ENDEXCLUDE)\\b"
-				},
-				{
-					"comment": "Operator Keywords",
-					"name": "keyword.other.csc",
-					"match": "(?i)\\b(AGGMISSG|CACHE|CALCPARALLEL|CALCTASKDIMS|CCTRACKCALC|CLEARUPDATESTATUS|COPYMISSINGBLOCK|CREATENONMISSINGBLK|CREATEBLOCKONEQ|FRMLBOTTOMUP|LOCKBLOCK|MSG|NOTICE|UPDATECALC|UPTOLOCAL|VAR|ARRAY|ALL|AVERAGE|DIM|FIRST|LAST|TWOPASS|ON|OFF|HIGH|DEFAULT|LOW|ALL|EMPTYMEMBERSETS|ERROR|SKIPNONE|SKIPMISSING|SKIPNONE|SKIPBOTH|THREADVAR)\\b"
-				},
-				{
-					"comment": "General Keywords",
-					"name": "support.class.csc",
-					"match": "(?i)\\b(AND|OR|NOT|TO|AGG|CALC|SET|CCONV|CLEARBLOCK|CLEARCCTRACK|CLEARDATA|DATACOPY|DATAEXPORT)\\b"
-				},
-				{
-					"comment": "@ Functions",
-					"name": "support.function.csc",
-					"match": "\\@\\w*"
-				},
-				{
-					"comment": "% Functions",
-					"name": "support.module.csc",
-					"match": "\\%\\w*|\\w*\\:\\="
-				},
-				{
-					"comment": "RTP / Sub / PRM Variables",
-					"name": "support.variable.csc",
-					"match": "(\\{)(.*?)(\\})|&\\w*|(\\[)(.*?)(\\])"
-				}
-				
-			]
-		},
-		"strings": {
-			"patterns": [
-				{
-					"name": "string.quoted.double.csc",
-					"begin": "\"",
-					"end": "\"",
-					"beginCaptures": {
-					  "0": {"name": "punctuation.start.csc"}
-					},
-					"endCaptures": {
-					  "0": {"name": "punctuation.end.csc"}
-					}
-				},
-				{
-					"name": "string.quoted.single.csc",
-					"begin": "'",
-					"end": "'",
-					"beginCaptures": {
-					  "0": {"name": "punctuation.start.csc"}
-					},
-					"endCaptures": {
-					  "0": {"name": "punctuation.end.csc"}
-					}
-				}
-			]
-		},
-		"comments":{
-			"patterns": [
-				{
-					"name": "comment.block.csc",
-					"begin": "/\\*",
-					"end": "\\*/",
-					"beginCaptures": {
-					  "0": {"name": "comment.block.csc"}
-					},
-					"endCaptures": {
-					  "0": {"name": "comment.block.csc"}
-					}
-				}
-				
-			]
-		},
-		"constants":{
-			"patterns":[
-				{
-					"comment": "General Numeric + #MISSING",
-					"name": "constant.numeric.csc",
-					"match": "\\s*(?<=[^$])((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))\\b|(?i)#MISSING"
-				},
-				{
-					"comment": "Operators",
-					"name": "support.type",
-					"match": "->|=|!=|==|<|>|\\+|-|\\/|\\*|\\;"
-				}
-			]
+    "filetypes": ["csc"],
+    "name": "EssCalc",
+    "scopeName": "source.esscalc",
+    "patterns": [{
+            "include": "#comments"
+        },
+        {
+            "include": "#punctuation"
+        },
+        {
+            "include": "#annotations"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#constants-and-special-vars"
+        },
+        {
+            "include": "#strings"
+        }
+    ],
 
-		}
-	},
-	"scopeName": "source.esscalc"
+    "repository": {
+        "comments": {
+            "patterns": [{
+                    "name": "comment.block.empty.csc",
+                    "match": "/\\*\\*/",
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.csc"
+                        }
+                    }
+                },
+                {
+                    "include": "#comments-doc"
+                },
+                {
+                    "include": "#comments-inline"
+                }
+            ]
+        },
+        "comments-inline": {
+            "patterns": [{
+                    "include": "#comments-block"
+                },
+                {
+                    "match": "((//).*)$",
+                    "captures": {
+                        "1": {
+                            "name": "comment.line.double-slash.csc"
+                        }
+                    }
+                }
+            ]
+        },
+        "comments-block": {
+            "patterns": [{
+                "name": "comment.block.csc",
+                "begin": "/\\*",
+                "end": "\\*/",
+                "patterns": [{
+                    "include": "#comments-block"
+                }]
+            }]
+        },
+        "constants-and-special-vars": {
+            "patterns": [{
+                    "name": "constant.language.csc",
+                    "match": "(?i)(AND|ALL|DEFAULT|DYNAMIC|EMPTY|FULL|FORCED|HIGH|LOW|MISSING|NONINPUT|NONMISSING|NOT|OFF|ON|OR|TO|UPPER|#MISSING)\\b"
+                },
+                {
+                    "name": "constant.numeric.csc",
+                    "match": "(?<=[^$])((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))"
+                },
+                {
+                    "include": "#function-identifier"
+                }
+
+            ]
+        },
+        "function-identifier": {
+            "patterns": [{
+                    "name": "entity.name.function.csc",
+                    "match": "(?i)(@ABS|@ACCUM|@ALLANCESTORS|@ALIAS|@ALLOCATE|@ANCEST|@ANCESTORS|@ANCESTVAL|@ATTRIBUTE|@ATTRIBUTEBVAL|@ATTRIBUTESVAL|@ATTRIBUTEVAL|@AVG|@AVGRANGE|@BETWEEN|@CALCMODE|@CHILDREN|@COMPOUND|@COMPOUNDGROWTH|@CONCATENATE|@CORRELATION|@COUNT|@CREATEBLOCK|@CURGEN|@CURLEV|@CURRMBR|@CURRMBRRANGE|@DATEDIFF|@DATEPART|@DATEROLL|@DECLINE|@DESCENDANTS|@DISCOUNT|@ENUMVALUE|@EQUAL|@EXP|@EXPAND|@FACTORIAL|@FORMATDATE|@GEN|@GENMBRS|@GROWTH|@IALLANCESTORS|@IANCESTORS|@ICHILDREN|@IDESCENDANTS|@ILANCESTORS|@ILDESCENDANTS|@ILSIBLINGS|@INT|@INTEREST|@INTERSECT|@IRDESCENDANTS|@IRR|@IRREX|@IRSIBLINGS|@ISACCTYPE|@ISANCEST|@ISATTRIBUTE|@ISCHILD|@ISDESC|@ISGEN|@ISIANCEST|@ISIBLINGS|@ISICHILD|@ISIDESC|@ISIPARENT|@ISISIBLING|@ISLEV|@ISMBR|@ISMBRUDA|@ISMBRWITHATTR|@ISPARENT|@ISRANGENONEMPTY|@ISSAMEGEN|@ISSAMELEV|@ISSIBLING|@ISUDA|@LANCESTORS|@LDESCENDANTS|@LEV|@LEVMBRS|@LIKE|@LIST|@LN|@LOG|@LOG10|@LSIBLINGS|@MATCH|@MAX|@MAXRANGE|@MAXS|@MAXSRANGE|@MBRCOMPARE|@MBRPARENT|@MDALLOCATE|@MDANCESTVAL|@MDPARENTVAL|@MDSHIFT|@MEDIAN|@MEMBER|@MEMBERAT|@MERGE|@MIN|@MINRANGE|@MINS|@MINSRANGE|@MOD|@MODE|@MOVAVG|@MOVMAX|@MOVMED|@MOVMIN|@MOVSUM|@MOVSUMX|@NAME|@NEXT|@NEXTS|@NEXTSIBLING|@NOTEQUAL|@NPV|@PARENT|@PARENTVAL|@POWER|@PREVSIBLING|@PRIOR|@PRIORS|@PTD|@RANGE|@RANGEFIRSTVAL|@RANGELASTVAL|@RANK|@RDESCENDANTS|@RELATIVE|@RELXRANGE|@REMAINDER|@REMOVE|@RETURN|@ROUND|@RSIBLINGS|@SANCESTVAL|@SHARE|@SHIFT|@SHIFTMINUS|@SHIFTPLUS|@SHIFTSIBLING|@SIBLINGS|@SLN|@SPARENTVAL|@SPLINE|@STDEV|@STDEVP|@STDEVRANGE|@SUBSTRING|@SUM|@SUMRANGE|@SYD|@TODATE|@TODATEEX|@TODAY|@TREND|@TRUNCATE|@UDA|@VAR|@VARPER|@VARIANCE|@VARIANCEP|@WITHATTR|@XRANGE|@XREF|@XWRITE)\\b"
+                },
+                {
+                    "name": "entity.name.function.csc",
+                    "match": "(?i)(AGGMISSG|ARRAY|AVERAGE|CACHE|CALCDIAGNOSTICS|CALCPARALLEL|CALCTASKDIMS|CCTRACKCALC|CLEARUPDATESTATUS|COPYMISSINGBLOCK|CREATEBLOCKONEQ|CREATENONMISSINGBLK|DATAEXPORTOPTIONS|DATAIMPORTIGNORETIMESTAMP|DIM|EMPTYMEMBERSETS|FIRST|FRMLBOTTOMUP|FRMLRTDYNAMIC|HYBRIDBSOINCALCSCRIPT|LAST|LOCKBLOCK|MSG|NOTICE|REMOTECALC|RUNTIMESUBVARS|SCAPERSPECTIVE|UPDATECALC|UPTOLOCAL)\\b"
+                }
+
+            ]
+        },
+        "keywords": {
+            "patterns": [{
+                    "name": "keyword.declaration.csc",
+                    "match": "(?i)(AGG|CALC|CCONV|CLEARBLOCK|CLEARCCTRACK|CLEARDATA|DATACOPY|DATAEXPORT|FIX|FIXPARALLEL|ENDFIX|ENDFIXPARALLEL|IF|ELSE|ELSEIF|ENDIF|LOOP|ENDLOOP|EXCLUDE|ENDEXCLUDE|POSTFIXPARALLEL|SET|TWOPASS|VAR)\\b"
+                },
+                {
+                    "name": "keyword.subvar.csc",
+                    "match": "(\\&[a-zA-Z0-9_]+)"
+                },
+                {
+                    "name": "keyword.operator.comparison.csc",
+                    "match": "(==|!=|<=|<|>=|>)"
+                },
+                {
+                    "name": "keyword.operator.assignment.arithmetic.csc",
+                    "match": "(([+*/%-]|\\~)=)"
+                },
+                {
+                    "name": "keyword.operator.assignment.csc",
+                    "match": "(=)"
+                },
+                {
+                    "name": "keyword.operator.crossdim.csc",
+                    "match": "(?:->)"
+                },
+
+                {
+                    "name": "keyword.operator.arithmetic.csc",
+                    "match": "(\\-|\\+|\\*|\\/|\\~\\/|%)"
+                }
+            ]
+        },
+
+        "string-interp": {
+            "patterns": [{
+                    "match": "(\\$[a-zA-Z0-9_]+)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.parameter.csc"
+                        }
+                    }
+                },
+                {
+                    "name": "string.interpolated.expression.csc",
+                    "begin": "\\(",
+                    "end": "\\)",
+                    "patterns": [{
+                            "include": "#keyword.control.csc"
+                        },
+
+                        {
+                            "include": "#function-identifier"
+                        },
+                        {
+                            "include": "#strings"
+                        },
+                        {
+                            "include": "#constants-and-special-vars",
+                            "name": "variable.parameter.csc"
+                        },
+                        {
+                            "name": "variable.parameter.csc",
+                            "match": "(\\$[a-zA-Z0-9_]+)"
+                        }
+                    ]
+                },
+                {
+                    "name": "constant.character.escape.csc",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [{
+                    "name": "string.interpolated.triple.double.csc",
+                    "begin": "(?<!r)\"\"\"",
+                    "end": "\"\"\"(?!\")",
+                    "patterns": [{
+                        "include": "#string-interp"
+                    }]
+                },
+                {
+                    "name": "string.interpolated.triple.single.csc",
+                    "begin": "(?<!r)'''",
+                    "end": "'''(?!')",
+                    "patterns": [{
+                        "include": "#string-interp"
+                    }]
+                },
+                {
+                    "name": "string.quoted.triple.double.csc",
+                    "begin": "r\"\"\"",
+                    "end": "\"\"\"(?!\")"
+                },
+                {
+                    "name": "string.quoted.triple.single.csc",
+                    "begin": "r'''",
+                    "end": "'''(?!')"
+                },
+                {
+                    "name": "string.interpolated.double.csc",
+                    "begin": "(?<!\\|r)\"",
+                    "end": "\"",
+                    "patterns": [{
+                            "name": "invalid.string.newline",
+                            "match": "\\n"
+                        },
+                        {
+                            "include": "#string-interp"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.double.csc",
+                    "begin": "r\"",
+                    "end": "\"",
+                    "patterns": [{
+                        "name": "invalid.string.newline",
+                        "match": "\\n"
+                    }]
+                },
+                {
+                    "name": "string.interpolated.single.csc",
+                    "begin": "(?<!\\|r)'",
+                    "end": "'",
+                    "patterns": [{
+                            "name": "invalid.string.newline",
+                            "match": "\\n"
+                        },
+                        {
+                            "include": "#string-interp"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.csc",
+                    "begin": "r'",
+                    "end": "'",
+                    "patterns": [{
+                        "name": "invalid.string.newline",
+                        "match": "\\n"
+                    }]
+                }
+            ]
+        },
+        "punctuation": {
+            "patterns": [{
+                    "name": "punctuation.comma.csc",
+                    "match": ","
+                },
+                {
+                    "name": "punctuation.terminator.csc",
+                    "match": ";"
+                },
+                {
+                    "name": "punctuation.dot.csc",
+                    "match": "\\."
+                }
+
+            ]
+        }
+    }
 }
