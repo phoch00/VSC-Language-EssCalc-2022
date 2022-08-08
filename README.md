@@ -3,6 +3,10 @@
 This is a language extension for VS Code for the Essbase Calculation Language for Oracle Hyperion
 
 ## To Install
+1. Install Extension from VS Code Marketplace
+
+Manual Install:
+
 1. Download the github repository
 2. Unzip to any directory
 3. Rename "VSC-Language-EssCalc-master" directory to "EssCalc"
