@@ -3,7 +3,7 @@
     "publisher": "vscode-essbase",
     "displayName": "EssCalc",
     "description": "Syntax Highlighting for Essbase Calculations",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "repository": "https://github.com/phoch00/VSC-Language-EssCalc-2022",
     "engines": {
         "vscode": "^1.45.0"

@@ -18,3 +18,12 @@ v 0.0.2 Forked by Paul Hoch
 - Replaced non-functional code with corresponding working code
 - Added in snippets for a few common tasks
 
+## 0.0.3
+20220809 v0.0.3
+
+Minor cleanup version released
+- Bump version to 0.0.3
+- Cleanup csc.tmLanguage.json for unused items.
+- Updated Readme to include credits and attributions.
+- Added To Do list to track items needed working on.
+- Included license file and other items needed for VS Code extension marketplace.
