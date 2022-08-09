@@ -46,7 +46,7 @@
             "\t",
             "ENDIF"
         ],
-        "description": "If-Else Statement"
+        "description": "If-Elseif Statement"
     },
 
     "fix Statement": {
@@ -64,7 +64,7 @@
             "DATACOPY (${source}) TO (${target});",
             "$0"
         ],
-        "description": "Fix Statement"
+        "description": "Datacopy Statement"
     },
     "Calcmode Statement": {
         "prefix": "@calcmode",
@@ -80,7 +80,7 @@
             "CLEARBLOCK ${ALL}|${UPPER}|${NONINPUT}|${DYNAMIC}|${EMPTY} ;",
             "$0"
         ],
-        "description": "Calcmode Statement"
+        "description": "Clearblock Statement"
     },
     "Relative Statement": {
         "prefix": "@relative",
