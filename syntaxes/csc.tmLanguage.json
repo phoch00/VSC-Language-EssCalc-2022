@@ -82,6 +82,10 @@
                 {
                     "name": "entity.name.function.csc",
                     "match": "(?i)(AGGMISSG|ARRAY|AVERAGE|CACHE|CALCDIAGNOSTICS|CALCPARALLEL|CALCTASKDIMS|CCTRACKCALC|CLEARUPDATESTATUS|COPYMISSINGBLOCK|CREATEBLOCKONEQ|CREATENONMISSINGBLK|DATAEXPORTOPTIONS|DATAIMPORTIGNORETIMESTAMP|DIM|EMPTYMEMBERSETS|FIRST|FRMLBOTTOMUP|FRMLRTDYNAMIC|HYBRIDBSOINCALCSCRIPT|LAST|LOCKBLOCK|MSG|NOTICE|REMOTECALC|RUNTIMESUBVARS|SCAPERSPECTIVE|UPDATECALC|UPTOLOCAL)\\b"
+                },
+                {
+                    "name": "entity.name.function.cdf.csc",
+                    "match": "(?i)(@hsp.*|@calcmgr.*)\\b"
                 }
 
             ]
