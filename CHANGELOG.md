@@ -27,3 +27,17 @@ Minor cleanup version released
 - Updated Readme to include credits and attributions.
 - Added To Do list to track items needed working on.
 - Included license file and other items needed for VS Code extension marketplace.
+
+
+## 0.0.4
+20220809 v0.0.4
+
+Current Development version
+- Bump version to 0.0.4
+- Added @Hsp and @CalcMgr syntax check.
+- Fixed descriptions for a few snippets.
+- Added Bug Reports and Feature Requests to repository. 
+- Added home page of Wiki
+- Added .gitignore file and excluded items
+- Added new snippet for @Remove 
+- Added Logo to repository and included in package.json.

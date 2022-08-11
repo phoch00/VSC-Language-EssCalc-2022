@@ -89,5 +89,13 @@
             "$0"
         ],
         "description": "@Relative Statement"
+    },
+    "Remove Statement": {
+        "prefix": "@remove",
+        "body": [
+            "@REMOVE ( ${fromlist}, ${thingstoremove}) ",
+            "$0"
+        ],
+        "description": "@Remove Statement"
     }
 }

@@ -1,7 +1,40 @@
+/* 
+Script Name: 	
+Written By: 	
+On: 	
+Purpose: 	
+
+
+Update Log: 	
+
+
+*/
+
 /* Calculate Payroll Taxes */
+
+
 
 'Testing123'
 "Hello" = 4 * 5
+
+/* Test for Planning Functions and Hsp Functions  */
+
+FIX(@IDESCENDANTS([[PlanningFunctions.getUserVarValue("MyDepartments")]]))
+
+	"Input"
+	(
+	IF("No Currency"->"Spread Method"->"BegBalance" == [[sl_Spreads.ActRR]])
+
+		"Input" = @MEMBER(@CONCATENATE("HSP_ID_", @Name(@HspNumToSTring("From Scenario"))))->"YearTotal;
+
+	ELSE
+		"Input" = #MISSING;
+
+	ENDIF
+	)
+ENDFIX
+
+
 "Social Security Tax" (
 	IF (@ISMBR ("Department General"))
 		IF ("CYTD Total Salary" <= "SSTax Cap")
