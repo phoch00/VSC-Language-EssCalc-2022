@@ -32,7 +32,6 @@ Minor cleanup version released
 ## 0.0.4
 20220809 v0.0.4
 
-Current Development version
 - Bump version to 0.0.4
 - Added @Hsp and @CalcMgr syntax check.
 - Fixed descriptions for a few snippets.
@@ -41,3 +40,10 @@ Current Development version
 - Added .gitignore file and excluded items
 - Added new snippet for @Remove 
 - Added Logo to repository and included in package.json.
+
+## 0.0.5
+20220816
+
+Current Development Version
+- Bump version to 0.0.5
+- Renamed Snippets file from csc.json to csc.snippets.json

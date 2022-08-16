@@ -39,7 +39,7 @@
         }],
         "snippets": [{
             "language": "csc",
-            "path": "./snippets/csc.json"
+            "path": "./snippets/csc.snippets.json"
         }],
         "configuration": {
             "type": "object",
